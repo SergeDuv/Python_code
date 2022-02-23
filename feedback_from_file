@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import os
+
+import requests
+
+directory='/data/feedback/'
+
+for file in os.listdir(directory):
+
+        fpath=directory+file
+
+        with open(fpath) as f:
+
+                lines=f.readlines()
+
+                feed={'title':lines[0],'name':lines[1],'date':lines[2],'feedback':lines[3]}
+
+                response=requests.post('http://<your_ip>/feedback/',json=feed)
+
+                print(response.status_code)
